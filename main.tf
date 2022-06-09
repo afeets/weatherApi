@@ -7,6 +7,12 @@ terraform {
   }
 }
 
+variable "IMAGEBUILD" {
+  type            = string
+  description     = "Latest Image Build" 
+}
+
+
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
@@ -41,7 +47,7 @@ resource "azurerm_container_group" "terraform_container_testing" {
 
   container {
     name                = "weatherapi"
-    image               = "andyfeetenby/weatherapi"
+    image               = "andyfeetenby/weatherapi:${var.IMAGEBUILD}"
     cpu                 = "1"
     memory              = "1"
 
