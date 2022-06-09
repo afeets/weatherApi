@@ -12,6 +12,18 @@ provider "azurerm" {
   features {}
 }
 
+# Configure Terraform to use state file
+terraform {
+  backend "azurerm" {
+    resource_group_name   = "tf_rg_blobstorage"
+    storage_account_name  = "tfstorageawf"
+    container_name        = "tfstate"
+    key                   = "terraform.tfstate"
+  }
+}
+
+
+
 # Create a resource group
 resource "azurerm_resource_group" "terraform_testing" {
   name     = "terraform_testing"
